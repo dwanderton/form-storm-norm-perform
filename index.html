@@ -5,26 +5,6 @@
   <title>Firebase Chat</title>
   <link rel="icon" href="data:;base64,iVBORw0KGgo=">
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <style>
-    body {
-      font-family: 'HelveticaNeue-Light';
-    }
-    .msg {
-      margin: 10px 0;
-      padding: 10px;
-      width: 400px;
-      background-color: #efefef;
-    }
-    #username, #text {
-      margin: 5px 0px;
-    }
-    #post {
-      padding: 0.5em 1em;
-      background-color: #50b1ff;
-      border: none;
-      color: #FFF;
-    }
-  </style>
   <script src='https://cdn.firebase.com/js/client/2.4.0/firebase.js'></script>
 </head>
 <body>
@@ -35,7 +15,6 @@
   <div id="chart"></div>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script>
-    <!-- we'll be adding code here -->
     var myFirebase = new Firebase('https://form-storm-norm-perform.firebaseio.com/');
     var usernameInput = document.querySelector('#username');
     var textInput = document.querySelector('#text');
@@ -52,16 +31,16 @@
     var startListening = function() {
       myFirebase.on('child_added', function(snapshot) {
         var msg = snapshot.val();
-      
+
         var msgUsernameElement = document.createElement("b");
         msgUsernameElement.textContent = msg.username;
-        
+
         var msgTextElement = document.createElement("p");
         msgTextElement.textContent = msg.text;
-  
+
         var msgElement = document.createElement("div");
         msgElement.className = "msg";
-	msgElement.appendChild(msgUsernameElement);
+	       msgElement.appendChild(msgUsernameElement);
         msgElement.appendChild(msgTextElement);
 
         document.getElementById("results").appendChild(msgElement);
@@ -72,32 +51,32 @@
     startListening();
   </script>
   <script>
-// Load the Visualization API and the corechart package.
-      google.charts.load('current', {'packages':['corechart']});
+  // Load the Visualization API and the corechart package.
+  google.charts.load('current', {'packages':['corechart']});
 
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.charts.setOnLoadCallback(drawChart);
+  // Set a callback to run when the Google Visualization API is loaded.
+  google.charts.setOnLoadCallback(drawChart);
 
-function drawChart() {
-  var dataTable = new google.visualization.DataTable();
-  dataTable.addColumn('string', 'Year');
-  dataTable.addColumn('number', 'USA');
-  dataTable.addColumn({type: 'string', role: 'annotation'});
-  dataTable.addColumn({type: 'string', role: 'annotationText', p: {html:true}});
-  dataTable.addColumn('number', 'China');
-  dataTable.addColumn('number', 'UK');
-  dataTable.addRows([
-    ['2000',  94, '',  '', 58, 28],
-    ['2004', 101, '',  '', 63, 30],
-    ['2008', 110, 'An all time high!', '<img width=100px src="https://upload.wikimedia.org/wikipedia/commons/2/28/Flag_of_the_USA.svg">', 100, 47],
-    ['2012', 104, '',  '', 88, 65]
-  ]);
+  function drawChart() {
+    var dataTable = new google.visualization.DataTable();
+    dataTable.addColumn('string', 'Year');
+    dataTable.addColumn('number', 'USA');
+    dataTable.addColumn({type: 'string', role: 'annotation'});
+    dataTable.addColumn({type: 'string', role: 'annotationText', p: {html:true}});
+    dataTable.addColumn('number', 'China');
+    dataTable.addColumn('number', 'UK');
+    dataTable.addRows([
+      ['2000',  94, '',  '', 58, 28],
+      ['2004', 101, '',  '', 63, 30],
+      ['2008', 110, 'An all time high!', '<img width=100px src="https://ichef.bbci.co.uk/news/320/cpsprodpb/004B/production/_100657000_wine.jpg">', 100, 47],
+      ['2012', 104, '',  '', 88, 65]
+    ]);
 
-  var options = { tooltip: {isHtml: true}};
-  var chart = new google.visualization.LineChart(document.getElementById('chart'));
-  chart.draw(dataTable, options);
-}
-</script>
+    var options = { tooltip: {isHtml: true}};
+    var chart = new google.visualization.LineChart(document.getElementById('chart'));
+    chart.draw(dataTable, options);
+  }
+  </script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
